@@ -29,9 +29,14 @@ class Store:
         active_products = []
 
         for item in self.list_of_products:
+            # checks if the item is a NonStockedProduct and continues on without get the quanity.
+            if item.NonStockedProduct:
+                active_products.append(item)
+                continue
             item.get_quantity()
             if item.is_active():
                 active_products.append(item)
+
 
         return active_products
 
@@ -40,14 +45,10 @@ class Store:
         total = 0
 
         for item in shopping_list:
+
             total += item[0].buy(item[1])
 
         return total
 
-
-product_list = [products.Product("MacBook Air M2", price=1450, quantity=100),
-                products.Product("Bose QuietComfort Earbuds", price=250, quantity=500),
-                products.Product("Google Pixel 7", price=500, quantity=250),
-                ]
 
 
